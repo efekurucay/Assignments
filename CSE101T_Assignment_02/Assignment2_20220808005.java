@@ -73,12 +73,39 @@ c. Returns a String for the grade letter(refer to assignment 1 for details)*/
         return gradeString ;
         
     }
+
 public static double gpaPoints(double grade){
-        double gradetwentyfive=(double)grade / 25;
+          if (grade >= 88 && grade <= 100){
+            return 4.0;
+          }        
+          else if (grade >= 81 && grade < 88){
+            return 3.5;
+          }
+          else if (grade >= 74 && grade < 81){
+            return 3.0;
+          }
+          else if (grade >= 67 && grade < 74){
+              return 2.5;
+        }
+        else if (grade >= 60 && grade < 67){
+            return 2.0;
+        }
+        else if (grade >= 53 && grade < 60){
+            return 1.5;
+        }
+        else if (grade >= 46 && grade < 53){
+            return 1.0;
+        }
+        else if (grade >= 35 && grade < 46){
+            return 0.5;
+        }
+        else {
+            return 0.0;
+            }
+
 /*a. A method to determine the gpaPoints based on the grade calculated
 b. Takes one decimal parameter for the grade earned
 c. Returns a decimal for the GPA points(refer to assignment 1 for details)*/
-      return gradetwentyfive;
     }
 
 public static String status(double grade){
@@ -211,13 +238,17 @@ else{
   System.out.println("********** Stundents Grades Entry **********");
 
 System.out.println("Please enter values that the student earned for each Item:");
-//TOTAL CATEGORY 1
-double totalcat1=0.0;
+
+
 double cat1notes;
 double cat2notes;
 double cat3notes;
 double cat4notes;
 double cat5notes;
+
+
+//TOTAL CATEGORY 1
+double totalcat1=0.0;
 for(int i=1;i<=cat1items;i++){
   do{ System.out.print(cat1name+" "+i+":");
   cat1notes=scannerInt.nextDouble();
