@@ -22,17 +22,16 @@ public static String formatCategoryName(String name) {
       
 public static boolean isQuantityValid(int[] quantity){
 
-  //a. A method to verify the quantity is valid
-  //b. Takes an array type parameter for the current quantity
-  //c. Returns a boolean
-  //i. True if quantity is positive
-  //ii. False for all other values  
+  boolean control= true; // 1 -1 2 3 
+
           for(int i=0; i<quantity.length; i++){
 
             if(quantity[i] < 0){return false;}
-            else{return true;}
+            else{control= true;}
           }
-          return true;
+
+
+          return control;
         }
 
 public static boolean isWeightValid(int []weight){
@@ -42,7 +41,7 @@ public static boolean isWeightValid(int []weight){
             totalWeight+=weight[i];
           }
 
-          return totalWeight > 0;
+          return totalWeight == 100 ;
         }
   
 public static String gradeLetter(double grade){
@@ -158,10 +157,9 @@ public static void calculateGrade(String[]category, int[] quantity,int[] weight)
 
 if (category.length == quantity.length && quantity.length == weight.length){
 
-if (isWeightValid(weight)==true){System.out.println("calisiyor");}
-
-
-  System.out.println("Welcome to our university grade system.");
+      if (isWeightValid(weight)==false ){System.out.println("ERROR: Invalid weight entered");}
+      else if (isQuantityValid(quantity)==false){System.out.println("ERROR: Invalid quantity entered");}
+      else{ System.out.println("Welcome to our university grade system.");
  System.out.println("Please enter a choice below:");
     Scanner scan = new Scanner(System.in);
     String[] liste={"Enter all grades",
@@ -197,9 +195,7 @@ for(int i=0; i< category.length;i++){
     int[] catweights;
 
   
-}
-
-
+}}
 
 else{System.out.println("ERROR: Array lengths are not all the same");}
 
@@ -213,8 +209,8 @@ else{System.out.println("ERROR: Array lengths are not all the same");}
 
 public static void main(String[] args) {
     String[] category = {"quIz", "homeWork","MidTerM exAm", "fiNal exaM"};
-    int[]quantity={4,3,1,1};
-    int[]weight={10,20,30,423};
+    int[]quantity={4,3,-1,1};
+    int[]weight={10,20,30,40};
    calculateGrade(category, quantity, weight);
 }
 
