@@ -20,26 +20,29 @@ public static String formatCategoryName(String name) {
           return name;
         }
       
-public static boolean isQuantityValid(int quantity){
+public static boolean isQuantityValid(int[] quantity){
 
   //a. A method to verify the quantity is valid
-  //b. Takes an integer type parameter for the current quantity
+  //b. Takes an array type parameter for the current quantity
   //c. Returns a boolean
   //i. True if quantity is positive
-  //ii. False for all other values
-  
-          return quantity > 0 ;
+  //ii. False for all other values  
+          for(int i=0; i<quantity.length; i++){
+
+            if(quantity[i] < 0){return false;}
+            else{return true;}
+          }
+          return true;
         }
- 
-public static boolean isWeightValid(int weight, int totalWeight){
-  /*a. A method to verify the weight is valid
-  b.Takes two integer type parameters for the weight and total weight so far
-  c. Returns a boolean
-  i. True if weight is non-negative and totalWeight + weight is not 
-  greater than 100
-  ii. False for all other values */
-          
-          return weight >= 0 && totalWeight + weight<= 100 ;
+
+public static boolean isWeightValid(int []weight){
+
+    int totalWeight=0;
+          for(int i=0; i< weight.length ; i++){
+            totalWeight+=weight[i];
+          }
+
+          return totalWeight > 0;
         }
   
 public static String gradeLetter(double grade){
@@ -130,20 +133,20 @@ public static String status(double grade){
 public static int menu(Scanner inp,String[]list){
         for(int i =0 ; i<list.length; i++){
          System.out.println(i +" - "+ list[i]);
-            
         }
         System.out.println("Q - to Quit");
         String input = inp.nextLine().toUpperCase();
-       
         
-        if(input.equals("Q")){
+        if(input.equalsIgnoreCase("Q")){
 System.out.println("Thank you for using our system. Have a nice day.");
             return -1;}
         else{
             int inputint = Integer.parseInt(input);
             if(inputint >=0 && inputint < list.length){
             return inputint; }
-            else{return menu(inp, list);}
+            else{
+              System.out.println("Invalid choice.");
+              return menu(inp, list);}
         }
         
 
@@ -151,10 +154,15 @@ System.out.println("Thank you for using our system. Have a nice day.");
     }
 
 public static void calculateGrade(String[]category, int[] quantity,int[] weight){
+    
 
-    System.out.println("Welcome to our university grade system.");
-    System.out.println("Please enter a choice below:");
+if (category.length == quantity.length && quantity.length == weight.length){
 
+if (isWeightValid(weight)==true){System.out.println("calisiyor");}
+
+
+  System.out.println("Welcome to our university grade system.");
+ System.out.println("Please enter a choice below:");
     Scanner scan = new Scanner(System.in);
     String[] liste={"Enter all grades",
     "Display grade information","Change a single grade"};
@@ -168,9 +176,6 @@ public static void calculateGrade(String[]category, int[] quantity,int[] weight)
             System.out.print("Please enter the grade for "+formatCategoryName(category[0])+" "+cat0+" >>");
             grade0[cat0-1]=scan.nextInt(); }
 */
-        
-
-
 for(int i=0; i< category.length;i++){
 
  int [] grade0 = new int[quantity[i]] ; 
@@ -178,57 +183,38 @@ for(int i=0; i< category.length;i++){
             System.out.print("Please enter the grade for "+formatCategoryName(category[i])+" "+cat+" >>");
             grade0[cat-1]=scan.nextInt(); }
 
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
         
-    
-
     //1 - Display grade information
     else if(choice==1){}
-    
-
     //2 - Change a single grade
     else if(choice==2){}
-
-
-
     //Q - to Quit
     else if(choice==-1){}
-
-
-    
     formatCategoryName(category);
     int [] catitems;
     int[] catweights;
+
+  
+}
+
+
+
+else{System.out.println("ERROR: Array lengths are not all the same");}
+
+
+
+
+
 
     }
 
 
 public static void main(String[] args) {
     String[] category = {"quIz", "homeWork","MidTerM exAm", "fiNal exaM"};
-    int[]quantity={4,3,1,1,};
-    int[]weight={10,20,30,40};
+    int[]quantity={4,3,1,1};
+    int[]weight={10,20,30,423};
    calculateGrade(category, quantity, weight);
 }
 
