@@ -22,11 +22,11 @@ public static String formatCategoryName(String name) {
       
 public static boolean isQuantityValid(int[] quantity){
 
-  boolean control= true; // 1 -1 2 3 
+  boolean control= true;
 
           for(int i=0; i<quantity.length; i++){
 
-            if(quantity[i] < 0){return false;}
+            if(quantity[i] <= 0){return false;}
             else{control= true;}
           }
 
@@ -159,43 +159,58 @@ if (category.length == quantity.length && quantity.length == weight.length){
 
       if (isWeightValid(weight)==false ){System.out.println("ERROR: Invalid weight entered");}
       else if (isQuantityValid(quantity)==false){System.out.println("ERROR: Invalid quantity entered");}
+
       else{ System.out.println("Welcome to our university grade system.");
- System.out.println("Please enter a choice below:");
-    Scanner scan = new Scanner(System.in);
-    String[] liste={"Enter all grades",
-    "Display grade information","Change a single grade"};
-    int choice = menu(scan, liste);
-    //0 - Enter all grades
-    if(choice==0){
+                  System.out.println("Please enter a choice below:");
+                    Scanner scan = new Scanner(System.in);
+                    String[] liste={"Enter all grades",
+                    "Display grade information","Change a single grade"};
+                    int choice = menu(scan, liste);
+                    //0 - Enter all grades
+                    if(choice==0){
 
- // BURASI SADECE QUİZ İÇİN MESELA YANİ CATEGORY INDEX 0 İÇİN 
-     /*   int [] grade0 = new int[quantity[0]] ; 
-        for(int cat0 = 1; cat0<= quantity[0];cat0++){
-            System.out.print("Please enter the grade for "+formatCategoryName(category[0])+" "+cat0+" >>");
-            grade0[cat0-1]=scan.nextInt(); }
-*/
-for(int i=0; i< category.length;i++){
+                      // BURASI SADECE QUİZ İÇİN MESELA YANİ CATEGORY INDEX 0 İÇİN 
+                          /*    int [] grade0 = new int[quantity[0]] ; 
+                              for(int i = 1; i<= grade0.length;i++){
+                                  System.out.print("Please enter the grade for "+formatCategoryName(category[0])+" "+i+" >>");
+                                  grade0[i-1]=scan.nextInt(); }
+                      */
 
- int [] grade0 = new int[quantity[i]] ; 
-        for(int cat = 1; cat<= quantity[i];cat++){
-            System.out.print("Please enter the grade for "+formatCategoryName(category[i])+" "+cat+" >>");
-            grade0[cat-1]=scan.nextInt(); }
+
+
+
+
+
+
+                              //String[] category = {"quIz", "homeWork","MidTerM exAm", "fiNal exaM"};
+                              // int[]quantity={5,3,1,1};
+                              //int[]weight={10,20,30,40};
+                    
+                                
+                              for(int i=0; i< category.length;i++){
+
+                                      int [] grade = new int[quantity[i]] ; 
+                                          for(int j = 1; j<= grade.length;j++){
+                                              System.out.print("Please enter the grade for "+formatCategoryName(category[i])+" "+j+" >>");
+                                              grade[j-1]=scan.nextInt(); }
 
 }
-}
+}  
         
-    //1 - Display grade information
-    else if(choice==1){}
-    //2 - Change a single grade
-    else if(choice==2){}
-    //Q - to Quit
-    else if(choice==-1){}
-    formatCategoryName(category);
-    int [] catitems;
-    int[] catweights;
-
+                    //1 - Display grade information
+                    else if(choice==1){}
+                    //2 - Change a single grade
+                    else if(choice==2){}
+                    //Q - to Quit
+                    else if(choice==-1){}
+                    else{}
+                    formatCategoryName(category);
+                    int [] catitems;
+                    int[] catweights;
+                    
   
 }}
+
 
 else{System.out.println("ERROR: Array lengths are not all the same");}
 
@@ -209,7 +224,7 @@ else{System.out.println("ERROR: Array lengths are not all the same");}
 
 public static void main(String[] args) {
     String[] category = {"quIz", "homeWork","MidTerM exAm", "fiNal exaM"};
-    int[]quantity={4,3,-1,1};
+    int[]quantity={5,3,1,1};
     int[]weight={10,20,30,40};
    calculateGrade(category, quantity, weight);
 }
