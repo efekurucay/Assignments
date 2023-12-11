@@ -170,11 +170,11 @@ if (category.length == quantity.length && quantity.length == weight.length){
                     if(choice==0){
 
                       // BURASI SADECE QUİZ İÇİN MESELA YANİ CATEGORY INDEX 0 İÇİN 
-                          /*    int [] grade0 = new int[quantity[0]] ; 
+                          /*  int [] grade0 = new int[quantity[0]] ; 
                               for(int i = 1; i<= grade0.length;i++){
                                   System.out.print("Please enter the grade for "+formatCategoryName(category[0])+" "+i+" >>");
-                                  grade0[i-1]=scan.nextInt(); }
-                      */
+                                  grade0[i-1]=scan.nextInt(); }*/
+                      
 
 
 
@@ -183,18 +183,33 @@ if (category.length == quantity.length && quantity.length == weight.length){
 
 
                               //String[] category = {"quIz", "homeWork","MidTerM exAm", "fiNal exaM"};
-                              // int[]quantity={5,3,1,1};
+                              // int[]quantity={1,2,1,1};
                               //int[]weight={10,20,30,40};
-                    
-                                
-                              for(int i=0; i< category.length;i++){
+                                int uzunluk=0; 
+                              for(int i=0; i< quantity.length;i++){
 
-                                      int [] grade = new int[quantity[i]] ; 
-                                          for(int j = 1; j<= grade.length;j++){
+                                uzunluk += quantity[i];
+                              }
+                                int [] grade = new int[uzunluk];
+
+                                int m = 0;
+                             for(int i=0; i< category.length;i++){
+                                        
+                                          for(int j = 1 ;  j<= quantity[i];j++){
                                               System.out.print("Please enter the grade for "+formatCategoryName(category[i])+" "+j+" >>");
-                                              grade[j-1]=scan.nextInt(); }
+                                              
+                                            grade[m++]=scan.nextInt(); 
+                                            }
+                                 
+                                              
 
-}
+} 
+     
+
+
+
+        for ( int i=0; i<grade.length; i++){System.out.println(grade[i]);}
+
 }  
         
                     //1 - Display grade information
@@ -224,9 +239,12 @@ else{System.out.println("ERROR: Array lengths are not all the same");}
 
 public static void main(String[] args) {
     String[] category = {"quIz", "homeWork","MidTerM exAm", "fiNal exaM"};
-    int[]quantity={5,3,1,1};
+    int[]quantity={1,2,1,1};
     int[]weight={10,20,30,40};
    calculateGrade(category, quantity, weight);
+
+  
+   
 }
 
 
