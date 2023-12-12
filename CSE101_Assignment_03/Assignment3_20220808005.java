@@ -83,34 +83,19 @@ public static String gradeLetter(double grade){
           
       }
   
-public static double gpaPoints(double grade){
-            if (grade >= 88 && grade <= 100){
-              return 4.0;
-            }        
-            else if (grade >= 81 && grade < 88){
-              return 3.5;
-            }
-            else if (grade >= 74 && grade < 81){
-              return 3.0;
-            }
-            else if (grade >= 67 && grade < 74){
-                return 2.5;
-          }
-          else if (grade >= 60 && grade < 67){
-              return 2.0;
-          }
-          else if (grade >= 53 && grade < 60){
-              return 1.5;
-          }
-          else if (grade >= 46 && grade < 53){
-              return 1.0;
-          }
-          else if (grade >= 35 && grade < 46){
-              return 0.5;
-          }
-          else {
-              return 0.0;
-              }
+      public static double gpaPoints(double grade) {
+        double gpa_points;
+        if(grade<=34) {gpa_points=0.0;}
+        else if(grade<=45) {gpa_points=0.5;}
+        else if(grade<=52) {gpa_points=1.0;}
+        else if(grade<=59) {gpa_points=1.5;}
+        else if(grade<=66) {gpa_points=2.0;}
+        else if(grade<=73) {gpa_points=2.5;}
+        else if(grade<=80) {gpa_points=3.0;}
+        else if(grade<=87) {gpa_points=3.5;}
+        else {gpa_points=4.0;}
+        return gpa_points;
+      
   
   /*a. A method to determine the gpaPoints based on the grade calculated
   b. Takes one decimal parameter for the grade earned
@@ -131,7 +116,7 @@ public static String status(double grade){
   
 public static int menu(Scanner inp,String[]list){
         for(int i =0 ; i<list.length; i++){
-         System.out.println(i +" - "+ list[i]);
+         System.out.println(i +" - "+ formatCategoryName(list[i]));
         }
         System.out.println("Q - to Quit");
         String input = inp.nextLine().toUpperCase();
@@ -152,6 +137,7 @@ System.out.println("Thank you for using our system. Have a nice day.");
 
     }
 
+public static boolean gradeControl(double grade){return grade>=0 && grade<=100;}
 
 public static void calculateGrade(String[]category, int[] quantity,int[] weight){
     
@@ -162,33 +148,46 @@ if (category.length == quantity.length && quantity.length == weight.length){
       else if (isQuantityValid(quantity)==false){System.out.println("ERROR: Invalid quantity entered");}
 
       else{ System.out.println("Welcome to our university grade system.");
-            int choice = 0;
+            int choice = 0; int cg=0;
             int uzunluk=0; // grades lenght
            for(int i=0; i< quantity.length;i++){uzunluk += quantity[i];}
-                        int [] grade = new int[uzunluk];
+                        double [] grade = new double[uzunluk]; 
+                        int whichcat =3; 
                         
-            do {System.out.println("Please enter a choice below:");
+            while(choice!=-1 && cg !=-1 ) {System.out.println("Please enter a choice below:");
                     Scanner scan = new Scanner(System.in);
                       String[] liste={"Enter all grades",
                     "Display grade information","Change a single grade"};
                     choice = menu(scan,liste);  
                     //0 - Enter all grades
                     if(choice==0){
-
-                                int m = 0; // counter
+                                double gradetest=0;
+                                int m = 0; // counter 
                              for(int i=0; i< category.length;i++){
                                         
                                           for(int j = 1 ;  j<= quantity[i];j++){
-                                              System.out.print("Please enter the grade for "+formatCategoryName(category[i])+" "+j+" >>");
-                                            grade[m++]=scan.nextInt(); 
-                                            }}}  
+
+                                            do{System.out.print("Please enter the grade for "+formatCategoryName(category[i])+" "+j+" >>");
+                                            gradetest =scan.nextInt(); 
+
+                                            if(gradeControl(gradetest)==true){ grade[m++]= gradetest;}
+                                            else{System.out.println("The grade must be between 0 and 100. Enter again.");}
+                                            
+                                           
+                                          
+                                          }
+                                            
+                                            while(gradeControl(gradetest)==false);
+                                              
 
 
+                                            }}System.out.print("\n");}  
 
                     //1 - Display grade information
                     else if(choice==1){
                     System.out.println("Category Information:");
-                      int sum=0; double average=0;int counter=0;
+                      double sum=0; double average=0;int counter=0;double weighttimesum=0;
+                      double overallgrade = 0;
                       
                       for (int a =0; a<category.length;a++) {
                         
@@ -202,28 +201,93 @@ if (category.length == quantity.length && quantity.length == weight.length){
                         }
                         average= sum/quantity[a]; 
                           System.out.println(formatCategoryName(category[a])+ " - "+average);
-                        sum=0;
+                        weighttimesum+= average*weight[a];
+                        sum=0; average=0;
                       }
 
-
-
-                
-
+                      overallgrade= weighttimesum/100;
+                System.out.print("\n");
+                System.out.println("Overall Grade - "+overallgrade);
+                System.out.println("Grade Letter - "+gradeLetter(overallgrade));
+                System.out.println("GPA Points - "+gpaPoints(overallgrade));   
+                System.out.println("Status - "+status(overallgrade)+"\n");   
 }//elseifchoice==1
 
-                      
-
-
                     //2 - Change a single grade
-                    else if(choice==2){}
+                    else if(choice==2){
+                      
+                      System.out.println("Please Enter the category");
+
+                          cg = menu(scan, category);
+                          if(cg == -1){return;}
+                          int eqgrade= 0;
+                          for(int i=0;i<=cg; i++){
+
+                            eqgrade+=quantity[i];
+
+                          }
+                          eqgrade --;
+                          double newval= 0;
+                          //FOR CATEGORIES THAT HAVE 1 QUANTITIES
+                          if(quantity[cg]==1){
+
+                            System.out.println("The current grade for "+formatCategoryName(category[cg])+" is "+ grade[eqgrade]);
+                            System.out.print("Please enter the new value >> ");
+                              do{
+                              newval= scan.nextInt();
+                            if(gradeControl(newval)==false){System.out.println("The grade must be between 0 and 100. Enter again.");}
+                            else{grade[eqgrade]= newval;}
+
+                             }while(gradeControl(newval)==false);
+                          
+                          
+                          
+                          }
+
+                          //FOR CATEGORIES THAT HAVE 2 OR MORE QUANTITIES
+                          else{
+                            System.out.print("Please enter which "+formatCategoryName(category[cg])+" you would like to change (1 - "+quantity[cg]+") >> ");
+                             whichcat= scan.nextInt(); 
+                             if(whichcat>quantity[cg]|| whichcat<=0){System.out.println("Invalid choice."); }
+                             else{
+                              System.out.println("The current grade for "+formatCategoryName(category[cg])+" "+whichcat+" is "+grade[eqgrade-1]);
+                             System.out.print("Please enter the new grade value >> ");
+                             do{
+                              newval= scan.nextInt();
+                            if(gradeControl(newval)==false){System.out.println("The grade must be between 0 and 100. Enter again.");}
+                            else{grade[eqgrade-1]= newval;}
+
+                             }while(gradeControl(newval)==false);}
+                             
+                             
+                            
+                          }
+
+                          
+                        
+                    
+                    }
+
                     //Q - to Quit
-                    else if(choice==-1){}
+                     else if (choice == -1 || cg == -1) {return; }
                     else{}}
 
-            while(choice!=-1);
+                   
                       
   
-}}
+}
+
+
+
+
+
+
+
+
+
+
+
+}
 
 
 
@@ -242,9 +306,9 @@ else{System.out.println("ERROR: Array lengths are not all the same");}}
 
 
 public static void main(String[] args) {
-    String[] category = {"quIz", "homeWork","MidTerM exAm", "fiNal exaM","eFeNote"};
-    int[]quantity={1,2,4,2,2};
-    int[]weight={10,20,30,20,20};
+    String[] category = {"quIz", "homeWork","MidTerM exAm", "fiNal exaM"};
+    int[]quantity={4,3,1,1};
+    int[]weight={10,20,30,40};
    calculateGrade(category, quantity, weight);
 
   
