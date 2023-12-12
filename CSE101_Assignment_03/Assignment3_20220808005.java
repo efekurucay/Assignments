@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 /**
  * Assignment3_20220808005
+ * Yahya Efe Kuruçay 12.12.2023
  */
 public class Assignment3_20220808005 {
 public static void formatCategoryName(String []name){
@@ -140,7 +141,6 @@ System.out.println("Thank you for using our system. Have a nice day.");
 public static boolean gradeControl(double grade){return grade>=0 && grade<=100;}
 
 public static void calculateGrade(String[]category, int[] quantity,int[] weight){
-    
 
 if (category.length == quantity.length && quantity.length == weight.length){
 
@@ -289,19 +289,6 @@ if (category.length == quantity.length && quantity.length == weight.length){
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-//***********************************************//
 else{System.out.println("ERROR: Array lengths are not all the same");}}
 
 
