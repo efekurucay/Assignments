@@ -152,6 +152,7 @@ System.out.println("Thank you for using our system. Have a nice day.");
 
     }
 
+
 public static void calculateGrade(String[]category, int[] quantity,int[] weight){
     
 
@@ -161,21 +162,18 @@ if (category.length == quantity.length && quantity.length == weight.length){
       else if (isQuantityValid(quantity)==false){System.out.println("ERROR: Invalid quantity entered");}
 
       else{ System.out.println("Welcome to our university grade system.");
-                  System.out.println("Please enter a choice below:");
+            int choice = 0;
+            int uzunluk=0; // grades lenght
+           for(int i=0; i< quantity.length;i++){uzunluk += quantity[i];}
+                        int [] grade = new int[uzunluk];
+                        
+            do {System.out.println("Please enter a choice below:");
                     Scanner scan = new Scanner(System.in);
-                    String[] liste={"Enter all grades",
+                      String[] liste={"Enter all grades",
                     "Display grade information","Change a single grade"};
-                    int choice = menu(scan, liste);
-                    int uzunluk=0; // grades lenght
-                              for(int i=0; i< quantity.length;i++){
-
-                                uzunluk += quantity[i];
-                              }
-                                int [] grade = new int[uzunluk];
+                    choice = menu(scan,liste);  
                     //0 - Enter all grades
                     if(choice==0){
-
-                                
 
                                 int m = 0; // counter
                              for(int i=0; i< category.length;i++){
@@ -183,98 +181,70 @@ if (category.length == quantity.length && quantity.length == weight.length){
                                           for(int j = 1 ;  j<= quantity[i];j++){
                                               System.out.print("Please enter the grade for "+formatCategoryName(category[i])+" "+j+" >>");
                                             grade[m++]=scan.nextInt(); 
-                                            }
-                                 
+                                            }}}  
 
-}      
 
-}  
-        
 
                     //1 - Display grade information
                     else if(choice==1){
+                    System.out.println("Category Information:");
+                      int sum=0; double average=0;int counter=0;
                       
-                      System.out.println("Category Information:");
-
-
-                      // calculate average of category[0]:
-                     // int sonterim =0;
-                      //int ilkterim=0;
-                      int sum=0;
-                      int average=0;
-
-                      for (String catString : category) {
-                        System.out.print(catString+ " - ");
+                      for (int a =0; a<category.length;a++) {
                         
-                      }
+                        if(a-1<0){counter=0;}
+                        else{counter += quantity[a-1];}
+                            
+                        for(int i=0;i<quantity[a];i++){
 
-                      for(int i = 0 ; i<quantity.length; i++){
-
-
-                        for(int j=1; j<quantity[i];j++){
-
-                            sum+=grade[j];
-                            average= sum/quantity[i];
-                            System.out.println(average);
-
+                          sum += grade[counter+i];
+                
                         }
-
-
-                        //sonterim+= quantity[i] -1 ;
-                         // ilkterim+= sonterim - quantity[i];
-
-                      //  int sum = grade[0]+grade[1]........grade[quantity[0]-1]    ----- cat(i) 0   i=0 
-                       // int sum = grade[quantity[0]]+ ........ + grade[quantity[0]+ quantity[1] -1]    ----- cat1  i=1 
-                       // int sum = grade[quantity[0]+ quantity[1]]...........+ grade[quantity[0]+ quantity[1] + quantity[2] -1]   ----- cat2  i=2
-
-
+                        average= sum/quantity[a]; 
+                          System.out.println(formatCategoryName(category[a])+ " - "+average);
+                        sum=0;
                       }
 
 
 
+                
+
+}//elseifchoice==1
+
                       
-                      
-
-
-
-
-                    }
 
 
                     //2 - Change a single grade
                     else if(choice==2){}
-
-
                     //Q - to Quit
                     else if(choice==-1){}
+                    else{}}
 
-
-
-                    else{}
-                    formatCategoryName(category);
-                    int [] catitems;
-                    int[] catweights;
-                   // for (int a : grade) {System.out.println(a); }
+            while(choice!=-1);
                       
-                   
   
 }}
 
 
-else{System.out.println("ERROR: Array lengths are not all the same");}
 
 
 
 
 
 
-    }
+
+
+
+
+
+//***********************************************//
+else{System.out.println("ERROR: Array lengths are not all the same");}}
 
 
 public static void main(String[] args) {
-    String[] category = {"quIz", "homeWork","MidTerM exAm", "fiNal exaM"};
-    int[]quantity={2,3,2,2};
-    int[]weight={10,20,30,40};
+    String[] category = {"quIz", "homeWork","MidTerM exAm", "fiNal exaM","eFeNote"};
+    int[]quantity={1,2,4,2,2};
+    int[]weight={10,20,30,20,20};
    calculateGrade(category, quantity, weight);
 
   
