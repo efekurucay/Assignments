@@ -16,7 +16,5 @@ I share this repo to leave a digital footprint on the internet. I don't know why
 If you have any questions, please feel free to contact me at <a href="https://www.efekurucay.com/" style="color: #00b006;">my website</a>.
 
 
-Thank you.
-
-2023.
+Thank you.2023.
 
