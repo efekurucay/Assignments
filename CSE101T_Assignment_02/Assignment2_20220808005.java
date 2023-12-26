@@ -3,6 +3,14 @@ import java.util.Scanner;
 /**
  * Assignment2_20220808005 @efekurucay24 
    @2023* 
+*-----------------------------------------------------
+* Akdeniz University CSE101T Assignments
+* Name: Yahya Efe Kurucay
+* Date: 13.11.2023
+* Description: Assignment2
+* Score: 84
+* Website: https://efekurucay.com
+*-----------------------------------------------------
  */
 public class Assignment2_20220808005 {
 

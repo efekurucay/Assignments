@@ -1,5 +1,14 @@
 import java.util.Scanner;
-
+/*
+*-----------------------------------------------------
+* Akdeniz University CSE101T Assignments
+* Name: Yahya Efe Kurucay
+* Date: 12.11.2023
+* Description: Assignment1b
+* Score: 44
+* Website: https://efekurucay.com
+*-----------------------------------------------------
+ */
 public class Assignment1b_20220808005 {
     
 public static void main(String[] args) {

@@ -1,5 +1,14 @@
 public class Assignment1a_20220808005{
-
+/*
+*-----------------------------------------------------
+* Akdeniz University CSE101T Assignments
+* Name: Yahya Efe Kurucay
+* Date: 01.11.2023
+* Description: Assignment1a
+* Score: 100
+* Website: https://efekurucay.com
+*-----------------------------------------------------
+ */
 public static void main(String[] args) {
 
 /*I found "/n" on google instead of write a lot of "." */
