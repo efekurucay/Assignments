@@ -1,3 +1,9 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Scanner;
 
 /**
  *-----------------------------------------------------
@@ -15,7 +21,7 @@ calculating the student grades.
 public class Assignment4_20220808005 {
 
 public static void main(String[] args) {
-/*
+/*Description
 4. main(args) - You will have a main method in this program
     a. We will pass the base filename(s) as command line arguments
         i. If one argument is passed, it will
@@ -42,15 +48,29 @@ public static void main(String[] args) {
     
 }   
 
-public static int[]countCategory(String filename){
+public static int countCategory(String filename){
 /*Description
 1. countCategory(filename)
     a. A new method to determine how many categories are in the category list
     b. Takes a String representing the entire filename as a parameter
     c. Returns an integer for the number of lines (categories) in the file
  */  
-int[]a={};
-return a;
+
+int count = 0;
+    File file = new File(filename);
+    Scanner scanner = new Scanner(filename); //file? filename?
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            if (!line.trim().isEmpty()) {
+                count++;
+            }
+        }
+        
+    //try catch statement can be added for the case of nonexistence of the file.
+    scanner.close();
+
+
+     return count;
 }
 
 public static void getCategory(String category,int quantity,int weight,String filename){

@@ -5,6 +5,7 @@ import java.util.Scanner;
  * Yahya Efe Kuruçay 12.12.2023
  */
 public class Assignment3_20220808005 {
+  
 public static void formatCategoryName(String []name){
 
     for(int i=0; i<name.length ; i++){
