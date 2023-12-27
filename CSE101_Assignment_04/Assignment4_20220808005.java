@@ -17,6 +17,24 @@ import java.util.Scanner;
 student grades for a list of students. It will then write two files to show the results of 
 calculating the student grades.
 
+Design: 
+When your main method is called, your program should display nothing. All interaction 
+with the program should be done through reading and writing files. 
+
+The expected file formats are as follows: 
+    1. Course Details 
+            a. Category name, quantity, weight separated by spaces 
+            b. Each category on a new line 
+    2. Student Scores 
+            a. Student name followed by all scores in order separated by spaces 
+            b. Scores are in order based on category and quantity 
+            c. Each student on a new line 
+    3. Student Grades 
+            a. Student name, score, grade letter, GPA points, status separated by spaces 
+            b. Each student on a new line 
+    4. Error log 
+            a. Each error on a new line beginning with “ERROR: “ 
+
  */
 public class Assignment4_20220808005 {
 
@@ -46,9 +64,12 @@ public static void main(String[] args) throws  FileNotFoundException{
     b. Returns none
  */
     System.out.println(countCategory("CSE101_CourseDetails.txt"));
+
+    
+   getCategory(args, null, null, "CSE101_CourseDetails.txt");
 }   
 
-public static int countCategory(String filename) throws FileNotFoundException{
+public static int countCategory(String filename) throws FileNotFoundException{ /*DONE*/
 /*Description
 1. countCategory(filename)
     a. A new method to determine how many categories are in the category list
@@ -72,7 +93,7 @@ public static int countCategory(String filename) throws FileNotFoundException{
      return count;
 }
 
-public static void getCategory(String category,int quantity,int weight,String filename){
+public static void getCategory(String[]category,int []quantity,int []weight,String filename) throws FileNotFoundException{
 
 /*Description
 2. getCategory(category, quantity, weight, filename)
@@ -88,7 +109,40 @@ public static void getCategory(String category,int quantity,int weight,String fi
     d. Returns None
 
  */
+File file = new File(filename);
+Scanner reader = new Scanner(file);
+// for(int i = 0; i < category.length; i++) {
 
+//     category[i] = reader.next();
+//     weight[i] = reader.nextInt();
+//     quantity[i] = reader.nextInt();}
+
+    String line;
+    // Okuma işlemi satır satır yapılır
+    while ((line = reader.nextLine()) != null) {
+        // Separate the information in the line according to spaces
+        String[] parts = line.split(" ");
+
+        // Place into arrays related to reserved information
+
+        if (parts.length == 3) { //category name, quantity, weight
+
+            for(int i =0 ; i<category.length;i++){
+
+           category[i] = parts[0];
+            quantity[i] = Integer.parseInt(parts[1]);
+            weight[i] = Integer.parseInt(parts[2]);
+
+            }
+        
+            // Dizilere bilileri ekle
+        } else {
+            System.out.println("Wrong format line: " + line);
+        }
+   
+    
+}
+reader.close();
 }
 
 public static void writeGrades(String []student, double[]grade, String studentGrades,String errorLog){
