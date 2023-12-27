@@ -148,20 +148,23 @@ public static void writeGrades(String []student, double[]grade, String studentGr
             to represent students with error conditions
     d. Returns None
  */
+
+ // Student score dan isim okunup student arrayine yazılacak.
+ //Student score dan notlar okunup grade arrayine yazılacak.
+ //Kaç tane not olduğu quantity e bağlı sanırım ona göre array oluşturulacak.
     File file = new File(studentGrades);
       Scanner scanner = new Scanner(file);
-
       int index = 0; 
-
       while (scanner.hasNext()) {
           String line = scanner.nextLine();
           // Separate the information in the line according to spaces
           String[] parts = line.split(" ");
 
         // Place into arrays related to reserved information
-        //   category[index]  = parts[0];
-        //   quantity[index]  = Integer.parseInt(parts[1]);
-        //   weight[index]= Integer.parseInt(parts[2]);
+          student[index]  = parts[0];
+
+          grade[index]  = Integer.parseInt(parts[1]);
+
 
           index++;
 
@@ -182,15 +185,15 @@ public static void writeGrades(String []student, double[]grade, String studentGr
 
 
 
-
-        String filename="a.txt";
+        // WRITING
+        // String filename="a.txt";
         // File file = new File(filename);
-        PrintWriter write = new PrintWriter(file);
-        for(int i = 0; i < student.length; i++){
-            write.println(student[i]+" " +  student[i]+" " + grade[i]);
-        }
+        // PrintWriter write = new PrintWriter(file);
+        // for(int i = 0; i < student.length; i++){
+        //     write.println(student[i]+" " +  student[i]+" " + grade[i]);
+        // }
 
-        write.close();
+        // write.close();
 
 
 }
