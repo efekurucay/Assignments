@@ -20,7 +20,7 @@ calculating the student grades.
  */
 public class Assignment4_20220808005 {
 
-public static void main(String[] args) {
+public static void main(String[] args) throws  FileNotFoundException{
 /*Description
 4. main(args) - You will have a main method in this program
     a. We will pass the base filename(s) as command line arguments
@@ -45,20 +45,19 @@ public static void main(String[] args) {
         will display an error message and exit
     b. Returns none
  */
-    
+    System.out.println(countCategory("CSE101_CourseDetails.txt"));
 }   
 
-public static int countCategory(String filename){
+public static int countCategory(String filename) throws FileNotFoundException{
 /*Description
 1. countCategory(filename)
     a. A new method to determine how many categories are in the category list
     b. Takes a String representing the entire filename as a parameter
     c. Returns an integer for the number of lines (categories) in the file
  */  
-
-int count = 0;
     File file = new File(filename);
-    Scanner scanner = new Scanner(filename); //file? filename?
+    int count = 0;
+    Scanner scanner = new Scanner(file);
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
             if (!line.trim().isEmpty()) {
@@ -114,4 +113,4 @@ public static void writeGrades(String []student, double[]grade, String studentGr
 
 //5. Any other methods you feel helpful can be created.
 
-}//CLASS
+}//CLASS//#endregion

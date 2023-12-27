@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Assignment4_20220808005",
+            "request": "launch",
+            "mainClass": "Assignment4TextFiles.Assignment4_20220808005",
+            "projectName": "CSE101_Assignment_04_36abbf94"
+        },
+        {
+            "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"
@@ -16,7 +23,11 @@
             "request": "launch",
             "mainClass": "Assignment4_20220808005",
             "projectName": "CSE101_Assignment_04_36abbf94",
-            "args":["banana","passionfruit","watermelon"]
+            "args": [
+                "banana",
+                "passionfruit",
+                "watermelon"
+            ]
         }
     ]
 }
