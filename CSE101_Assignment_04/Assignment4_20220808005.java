@@ -146,53 +146,60 @@ public static void writeGrades(String []student, double[]grade, String studentGr
     d. Returns None
  */
 
+test2("CSE101_CourseDetails.txt");
 
 //Read and place students name from studentGrades text file to student array.
-
+//Read and place students grades from studentGrades text file to grade array.
       File file = new File(studentGrades);
       Scanner scanner = new Scanner(file);
       int index = 0; 
-      int countGrade=0;
-      int countGrade2=0;
-
+      
+      double [][] grades = new double[student.length][9];
+      
       while (scanner.hasNext()) {
           String line = scanner.nextLine();
           // Separate the information in the line according to spaces
           String[] parts = line.split(" ");
 
-
-
         // Place into arrays related to reserved information
-
+        //Student informations
           student[index]  = parts[0];
       
+        // Grades information per student
+        // grades[0][i] = John's grades.
+        // grades[1][i] = Can's grades. ( 50.0/ 70.0/ 8.0 /90.0 ) (20.0 /75.0 /70.0 )  (89.5)    (2.0 )
+        //                                        Quiz                  Homework      Midterm    Final
+        // grades[2][i] = Efe's grades.
+        // grades[3][i] = Cannot's grades.
+        // grades[4][i] = Burak's grades.
+          for (int i = 0; i < grades[0].length; i++) {
 
-            for(int i=1; i<=2;i++){
-              
-              grade[countGrade2 + i-1]  = Double.parseDouble(parts[i]);
-
-              countGrade++;
-              
-             
-            }
-        
-            countGrade2+=countGrade;
-
-    
+              grades[index][i]= Double.parseDouble(parts[i+1]);
+          }
           index++;
-
       }
       
-      for(int i=0;i<student.length;i++){
-
-          System.out.print("Grades of student "+ student[i] + ": ");
-          for(int j=0; j<grade.length;j++){
-              System.out.print(grade[j]+" ");
+        //Calculating grades  (then change the array according to quantities).
+      
+      for (int i = 0; i < student.length; i++) {
+        
+          for (int j = 0; j < grades.length; j++) {
+            
 
           }
-          System.out.println("");
+
+
+
       }
-    
+
+
+
+
+
+
+
+
+      
 
 
       scanner.close();
@@ -205,7 +212,7 @@ public static void writeGrades(String []student, double[]grade, String studentGr
 
 
 
-//Read and place students grades from studentGrades text file to grade array. (then change the array according to quantities).
+
 
 
 
@@ -245,18 +252,20 @@ public static void test2(String filename) throws FileNotFoundException{
    getCategory(category, quantity, weight, filename);
 
    // Okunan bilgileri ekrana yazdırın (test amaçlı)
-   System.out.println(category[1]);
+   
 }
 
 public static void test3(String filename) throws FileNotFoundException{
 
 
-String []student = new String [4];
+String []student = new String [5];
 double []grade = new double [36];
 String studentsGrade = filename;
 
 
 writeGrades(student, grade, studentsGrade, studentsGrade);
+
+
 
  
 
