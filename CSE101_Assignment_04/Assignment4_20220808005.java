@@ -40,6 +40,7 @@ The expected file formats are as follows:
 public class Assignment4_20220808005 {
 public static void main(String[] args) throws  FileNotFoundException{
 /*Description
+
 4. main(args) - You will have a main method in this program
     a. We will pass the base filename(s) as command line arguments
         i. If one argument is passed, it will
@@ -63,6 +64,16 @@ public static void main(String[] args) throws  FileNotFoundException{
         will display an error message and exit
     b. Returns none
  */
+
+if (args.length == 1) {
+  processFiles(args[0] + "_CourseDetails.txt", args[0] + "_StudentScores.txt", args[0] + "_StudentGrades.txt", args[0] + "_Errors.log");} 
+else if (args.length == 4) {
+  processFiles(args[0] + ".txt", args[1] + ".txt", args[2] + ".txt", args[3] + ".log");} 
+else {
+  System.err.println("Error: Incorrect number of arguments. Either 1 or 4 arguments are expected.");
+  System.exit(1);
+}
+
 
 }   
 
@@ -197,6 +208,70 @@ public static void writeGrades(String []student, double[]grade, String studentGr
 
 
 }
+
+public static void processFiles(String categoryFile, String studentScoresFile, String studentGradesFile, String errorLogFile) throws FileNotFoundException {
+  int categoryCount = countCategory(categoryFile);
+  String[] categories = new String[categoryCount];
+  int[] quantities = new int[categoryCount];
+  int[] weights = new int[categoryCount];
+
+  getCategory(categories, quantities, weights, categoryFile);
+
+  int studentCount = countCategory(studentScoresFile);
+  String[] students = new String[studentCount];
+  double[] grades = new double[studentCount];
+
+  writeGrades(students, grades, studentScoresFile, studentGradesFile);
+}
+
+
+//Method tester for countCategory, getCategory, writeGrades
+public static void test1(String filename) throws FileNotFoundException{System.out.println(countCategory(filename));}
+
+public static void test2(String filename) throws FileNotFoundException{
+      // Test için kullanılacak dizileri oluşturun
+   String[] category= new String[10];
+   int[] quantity = new int[10];
+   int[] weight = new int[10];
+
+   // Dosyadan bilgileri okuyun
+   getCategory(category, quantity, weight, filename);
+
+   // Okunan bilgileri ekrana yazdırın (test amaçlı)
+   System.out.println(category[1]);
+}
+
+public static void test3(String filename) throws FileNotFoundException{
+
+String[] category= new String[10];
+   int[] quantity = new int[10];
+   int[] weight = new int[10];
+
+   // Dosyadan bilgileri okuyun
+   getCategory(category, quantity, weight, filename);
+
+
+int length= countCategory("CSE101_StudentScores.txt");
+
+String []student = new String [length];
+double []grade = new double [length];
+String studentsGrade = "CSE101_StudentScores.txt";
+
+writeGrades(student, grade, studentsGrade, studentsGrade);
+
+  for(int i=0; i<student.length; i++){
+
+    System.out.println("Grades of student "+ student[i]+" = "+ grade[i]);
+  }
+
+
+}
+
+
+
+
+
+
 
 
 //ASSIGNMENT 3 METHODS
@@ -486,32 +561,6 @@ if (category.length == quantity.length && quantity.length == weight.length){
 }
 
 else{System.out.println("ERROR: Array lengths are not all the same");}}
-
-
-//Method tester for countCategory, getCategory, writeGrades
-public static void test1(String filename) throws FileNotFoundException{System.out.println(countCategory(filename));}
-
-public static void test2(String filename) throws FileNotFoundException{
-      // Test için kullanılacak dizileri oluşturun
-   String[] category= new String[10];
-   int[] quantity = new int[10];
-   int[] weight = new int[10];
-
-   // Dosyadan bilgileri okuyun
-   getCategory(category, quantity, weight, filename);
-
-   // Okunan bilgileri ekrana yazdırın (test amaçlı)
-   System.out.println(category[1]);
-}
-
-public static void test3(String filename) throws FileNotFoundException{}
-
-
-
-
-
-
-
 
 
 
