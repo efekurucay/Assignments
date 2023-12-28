@@ -65,42 +65,50 @@ public static void main(String[] args) throws  FileNotFoundException{
     b. Returns none
  */
 // Komut satırı argümanlarını kontrol etme
-if (args.length == 1 || args.length == 4) {
-  // Dosya isimlerini ve yollarını belirleme
-  String courseDetailsFile, studentScoresFile, studentGradesFile, errorLogFile;
-  if (args.length == 1) {
-      String baseFilename = args[0];
-      courseDetailsFile = baseFilename + "_CourseDetails.txt";
-      studentScoresFile = baseFilename + "_StudentScores.txt";
-      studentGradesFile = baseFilename + "_StudentGrades.txt";
-      errorLogFile = baseFilename + "_Errors.log";
-  } else {
-      courseDetailsFile = args[0] + ".txt";
-      studentScoresFile = args[1] + ".txt";
-      studentGradesFile = args[2] + ".txt";
-      errorLogFile = args[3] + ".log";
-  }
+    if (args.length == 1 || args.length == 4) {
+        // Dosya isimlerini ve yollarını belirleme
+        String courseDetailsFile, studentScoresFile, studentGradesFile, errorLogFile;
+        if (args.length == 1) {
+            String baseFilename = args[0];
+            courseDetailsFile = baseFilename + "_CourseDetails.txt";
+            studentScoresFile = baseFilename + "_StudentScores.txt";
+            studentGradesFile = baseFilename + "_StudentGrades.txt";
+            errorLogFile = baseFilename + "_Errors.log";
+        } else {
+            courseDetailsFile = args[0] + ".txt";
+            studentScoresFile = args[1] + ".txt";
+            studentGradesFile = args[2] + ".txt";
+            errorLogFile = args[3] + ".log";
+        }
 
-  // Kategori bilgilerini okuma
-  String[] category = new String[10];
-  int[] quantity = new int[10];
-  int[] weight = new int[10];
-  getCategory(category, quantity, weight, courseDetailsFile);
+        // Kategori bilgilerini okuma
+        String[] category = new String[10];
+        int[] quantity = new int[10];
+        int[] weight = new int[10];
+        getCategory(category, quantity, weight, courseDetailsFile);
 
-  // Öğrenci bilgilerini okuma ve not hesaplama
-  int numStudents = countCategory(studentScoresFile);
-  String[] student = new String[numStudents];
-  double[] grade = new double[numStudents];
-  readStudentScoresAndCalculateGrades(student, grade, studentScoresFile, category, quantity, weight, errorLogFile);
+        // Öğrenci bilgilerini okuma ve not hesaplama
+        int numStudents = countCategory(studentScoresFile);
+        String[] student = new String[numStudents];
+        double[] grade = new double[numStudents];
+        readStudentScoresAndCalculateGrades(student, grade, studentScoresFile, category, quantity, weight, errorLogFile);
 
-  // Öğrenci notlarını yazma
-  writeGrades(student, grade, studentGradesFile, errorLogFile);
-} else {
-  System.out.println("Hatalı argüman sayısı. Lütfen 1 veya 4 argüman girin.");
-}
+        // Öğrenci notlarını yazma
+        writeGrades(student, grade, studentGradesFile, errorLogFile);
+    } else {
+        System.out.println("Hatalı argüman sayısı. Lütfen 1 veya 4 argüman girin.");
+    }
 
 
 }   
+
+public static void readStudentScoresAndCalculateGrades(String[] student, double[] grade, String studentScoresFile, String[] category, int[] quantity, int[] weight, String errorLogFile) throws FileNotFoundException {
+  // Öğrenci bilgilerini okuma ve notları hesaplama
+  // ... (Burada kategori ve miktar bilgileriyle not hesaplama mantığını uygulamalısınız.)
+
+  // Hata varsa hata mesajını hata log dosyasına yazma
+  // ... (Hata tespiti ve loglama işlemini burada gerçekleştirmelisiniz.)
+}
 
 public static int countCategory(String filename) throws FileNotFoundException{ /*DONE*/
 /*Description
