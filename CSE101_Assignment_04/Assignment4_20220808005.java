@@ -64,51 +64,8 @@ public static void main(String[] args) throws  FileNotFoundException{
         will display an error message and exit
     b. Returns none
  */
-// Komut satırı argümanlarını kontrol etme
-    if (args.length == 1 || args.length == 4) {
-        // Dosya isimlerini ve yollarını belirleme
-        String courseDetailsFile, studentScoresFile, studentGradesFile, errorLogFile;
-        if (args.length == 1) {
-            String baseFilename = args[0];
-            courseDetailsFile = baseFilename + "_CourseDetails.txt";
-            studentScoresFile = baseFilename + "_StudentScores.txt";
-            studentGradesFile = baseFilename + "_StudentGrades.txt";
-            errorLogFile = baseFilename + "_Errors.log";
-        } else {
-            courseDetailsFile = args[0] + ".txt";
-            studentScoresFile = args[1] + ".txt";
-            studentGradesFile = args[2] + ".txt";
-            errorLogFile = args[3] + ".log";
-        }
-
-        // Kategori bilgilerini okuma
-        String[] category = new String[10];
-        int[] quantity = new int[10];
-        int[] weight = new int[10];
-        getCategory(category, quantity, weight, courseDetailsFile);
-
-        // Öğrenci bilgilerini okuma ve not hesaplama
-        int numStudents = countCategory(studentScoresFile);
-        String[] student = new String[numStudents];
-        double[] grade = new double[numStudents];
-        readStudentScoresAndCalculateGrades(student, grade, studentScoresFile, category, quantity, weight, errorLogFile);
-
-        // Öğrenci notlarını yazma
-        writeGrades(student, grade, studentGradesFile, errorLogFile);
-    } else {
-        System.out.println("Hatalı argüman sayısı. Lütfen 1 veya 4 argüman girin.");
-    }
-
-
+test3("CSE101_StudentScores.txt");
 }   
-
-public static void readStudentScoresAndCalculateGrades(String[] student, double[] grade, String studentScoresFile, String[] category, int[] quantity, int[] weight, String errorLogFile) throws FileNotFoundException {
-  // Öğrenci bilgilerini okuma ve notları hesaplama
-  // ... (Burada kategori ve miktar bilgileriyle not hesaplama mantığını uygulamalısınız.)
-
-  // Hata varsa hata mesajını hata log dosyasına yazma
-  // ... (Hata tespiti ve loglama işlemini burada gerçekleştirmelisiniz.)
-}
 
 public static int countCategory(String filename) throws FileNotFoundException{ /*DONE*/
 /*Description
@@ -153,8 +110,6 @@ public static void getCategory(String[]category,int []quantity,int []weight,Stri
  */
 
     
-      
-    
       File file = new File(filename);
       Scanner scanner = new Scanner(file);
 
@@ -169,9 +124,7 @@ public static void getCategory(String[]category,int []quantity,int []weight,Stri
           category[index]  = parts[0];
           quantity[index]  = Integer.parseInt(parts[1]);
           weight[index]= Integer.parseInt(parts[2]);
-
           index++;
-
       }
       scanner.close();
 }
@@ -193,26 +146,55 @@ public static void writeGrades(String []student, double[]grade, String studentGr
     d. Returns None
  */
 
- // Student score dan isim okunup student arrayine yazılacak.
- //Student score dan notlar okunup grade arrayine yazılacak.
- //Kaç tane not olduğu quantity e bağlı sanırım ona göre array oluşturulacak.
-    File file = new File(studentGrades);
+
+//Read and place students name from studentGrades text file to student array.
+
+      File file = new File(studentGrades);
       Scanner scanner = new Scanner(file);
       int index = 0; 
+      int countGrade=0;
+      int countGrade2=0;
+
       while (scanner.hasNext()) {
           String line = scanner.nextLine();
           // Separate the information in the line according to spaces
           String[] parts = line.split(" ");
 
+
+
         // Place into arrays related to reserved information
+
           student[index]  = parts[0];
+      
 
-          grade[index]  = Integer.parseInt(parts[1]);
+            for(int i=1; i<=2;i++){
+              
+              grade[countGrade2 + i-1]  = Double.parseDouble(parts[i]);
 
+              countGrade++;
+              
+             
+            }
+        
+            countGrade2+=countGrade;
 
+    
           index++;
 
       }
+      
+      for(int i=0;i<student.length;i++){
+
+          System.out.print("Grades of student "+ student[i] + ": ");
+          for(int j=0; j<grade.length;j++){
+              System.out.print(grade[j]+" ");
+
+          }
+          System.out.println("");
+      }
+    
+
+
       scanner.close();
 
 
@@ -221,6 +203,9 @@ public static void writeGrades(String []student, double[]grade, String studentGr
 
 
 
+
+
+//Read and place students grades from studentGrades text file to grade array. (then change the array according to quantities).
 
 
 
@@ -243,19 +228,8 @@ public static void writeGrades(String []student, double[]grade, String studentGr
 }
 
 
-  int categoryCount = countCategory(categoryFile);
-  String[] categories = new String[categoryCount];
-  int[] quantities = new int[categoryCount];
-  int[] weights = new int[categoryCount];
+  
 
-  getCategory(categories, quantities, weights, categoryFile);
-
-  int studentCount = countCategory(studentScoresFile);
-  String[] students = new String[studentCount];
-  double[] grades = new double[studentCount];
-
-  writeGrades(students, grades, studentScoresFile, studentGradesFile);
-}
 
 
 //Method tester for countCategory, getCategory, writeGrades
@@ -276,29 +250,35 @@ public static void test2(String filename) throws FileNotFoundException{
 
 public static void test3(String filename) throws FileNotFoundException{
 
-String[] category= new String[10];
-   int[] quantity = new int[10];
-   int[] weight = new int[10];
 
-   // Dosyadan bilgileri okuyun
-   getCategory(category, quantity, weight, filename);
+String []student = new String [4];
+double []grade = new double [36];
+String studentsGrade = filename;
 
-
-int length= countCategory("CSE101_StudentScores.txt");
-
-String []student = new String [length];
-double []grade = new double [length];
-String studentsGrade = "CSE101_StudentScores.txt";
 
 writeGrades(student, grade, studentsGrade, studentsGrade);
 
-  for(int i=0; i<student.length; i++){
-
-    System.out.println("Grades of student "+ student[i]+" = "+ grade[i]);
-  }
-
+ 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
