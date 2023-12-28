@@ -1,9 +1,4 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Scanner;
 
 /**
@@ -145,17 +140,30 @@ public static void writeGrades(String []student, double[]grade, String studentGr
             to represent students with error conditions
     d. Returns None
  */
+System.out.println(countCategory("CSE101_CourseDetails.txt"));
+ String[] category= new String[countCategory("CSE101_CourseDetails.txt")];
+   int[] quantity = new int[countCategory("CSE101_CourseDetails.txt")];
+   int[] weight = new int[countCategory("CSE101_CourseDetails.txt")];
+// Read information from the text file.
+   getCategory(category, quantity, weight, "CSE101_CourseDetails.txt");
 
-test2("CSE101_CourseDetails.txt");
 
 //Read and place students name from studentGrades text file to student array.
 //Read and place students grades from studentGrades text file to grade array.
       File file = new File(studentGrades);
       Scanner scanner = new Scanner(file);
       int index = 0; 
+      int quant=0;
+
+      double [][] grades = new double[student.length][9]; //BU 9 U ÇÖZMEK LAZIM
+
+    for (int i = 0; i < quantity.length; i++) {
       
-      double [][] grades = new double[student.length][9];
-      
+    }
+
+      double [][][] eachGrade= new double [student.length][category.length][9];
+      // eachGrade [0][0][0] John's quizs first grade = 60
+
       while (scanner.hasNext()) {
           String line = scanner.nextLine();
           // Separate the information in the line according to spaces
@@ -177,24 +185,29 @@ test2("CSE101_CourseDetails.txt");
               grades[index][i]= Double.parseDouble(parts[i+1]);
           }
           index++;
-      }
+      }//WHILE LOOP
       
         //Calculating grades  (then change the array according to quantities).
-      
-      for (int i = 0; i < student.length; i++) {
+
+   
+      /* DREAM
+      // for (int i = 0; i < student.length; i++) { // Students for
         
-          for (int j = 0; j < grades.length; j++) {
-            
-
-          }
-
-
-
-      }
-
-
-
-
+      //     for (int j = 0; j <category.length; j++) { // Categories for
+              
+      //         for (int k = 0; k < quantity[j]; k++) { // Grades for
+                
+      //           eachGrade[i][j][k] =  grades[i][quant+k]; // Canın j.kategorisinin k. notu = canın bütün notlarının k. notu.
+                
+      //         }quant+=quantity[j]; } }
+      // // John 60 70 80 90 65 75 70 89.5 1
+      // // Can 50 70 8 90 20 75 70 89.5 2
+      // // Efe 100 100 10 100 95 90 100 80 3
+      // // Cannot 60 31 8 90 80 75 28 89.5 4
+      // // Burak 20 65 98 22 4 56 20 15 10
+      // System.out.println(eachGrade[1][2][0]);*/
+          
+      
 
 
 
@@ -235,10 +248,6 @@ test2("CSE101_CourseDetails.txt");
 }
 
 
-  
-
-
-
 //Method tester for countCategory, getCategory, writeGrades
 public static void test1(String filename) throws FileNotFoundException{System.out.println(countCategory(filename));}
 
@@ -258,6 +267,7 @@ public static void test2(String filename) throws FileNotFoundException{
 public static void test3(String filename) throws FileNotFoundException{
 
 
+
 String []student = new String [5];
 double []grade = new double [36];
 String studentsGrade = filename;
@@ -270,29 +280,6 @@ writeGrades(student, grade, studentsGrade, studentsGrade);
  
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //ASSIGNMENT 3 METHODS
 
@@ -581,8 +568,6 @@ if (category.length == quantity.length && quantity.length == weight.length){
 }
 
 else{System.out.println("ERROR: Array lengths are not all the same");}}
-
-
 
 
 
