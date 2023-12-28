@@ -64,14 +64,39 @@ public static void main(String[] args) throws  FileNotFoundException{
         will display an error message and exit
     b. Returns none
  */
+// Komut satırı argümanlarını kontrol etme
+if (args.length == 1 || args.length == 4) {
+  // Dosya isimlerini ve yollarını belirleme
+  String courseDetailsFile, studentScoresFile, studentGradesFile, errorLogFile;
+  if (args.length == 1) {
+      String baseFilename = args[0];
+      courseDetailsFile = baseFilename + "_CourseDetails.txt";
+      studentScoresFile = baseFilename + "_StudentScores.txt";
+      studentGradesFile = baseFilename + "_StudentGrades.txt";
+      errorLogFile = baseFilename + "_Errors.log";
+  } else {
+      courseDetailsFile = args[0] + ".txt";
+      studentScoresFile = args[1] + ".txt";
+      studentGradesFile = args[2] + ".txt";
+      errorLogFile = args[3] + ".log";
+  }
 
-if (args.length == 1) {
-  processFiles(args[0] + "_CourseDetails.txt", args[0] + "_StudentScores.txt", args[0] + "_StudentGrades.txt", args[0] + "_Errors.log");} 
-else if (args.length == 4) {
-  processFiles(args[0] + ".txt", args[1] + ".txt", args[2] + ".txt", args[3] + ".log");} 
-else {
-  System.err.println("Error: Incorrect number of arguments. Either 1 or 4 arguments are expected.");
-  System.exit(1);
+  // Kategori bilgilerini okuma
+  String[] category = new String[10];
+  int[] quantity = new int[10];
+  int[] weight = new int[10];
+  getCategory(category, quantity, weight, courseDetailsFile);
+
+  // Öğrenci bilgilerini okuma ve not hesaplama
+  int numStudents = countCategory(studentScoresFile);
+  String[] student = new String[numStudents];
+  double[] grade = new double[numStudents];
+  readStudentScoresAndCalculateGrades(student, grade, studentScoresFile, category, quantity, weight, errorLogFile);
+
+  // Öğrenci notlarını yazma
+  writeGrades(student, grade, studentGradesFile, errorLogFile);
+} else {
+  System.out.println("Hatalı argüman sayısı. Lütfen 1 veya 4 argüman girin.");
 }
 
 
@@ -209,7 +234,7 @@ public static void writeGrades(String []student, double[]grade, String studentGr
 
 }
 
-public static void processFiles(String categoryFile, String studentScoresFile, String studentGradesFile, String errorLogFile) throws FileNotFoundException {
+
   int categoryCount = countCategory(categoryFile);
   String[] categories = new String[categoryCount];
   int[] quantities = new int[categoryCount];
@@ -266,8 +291,6 @@ writeGrades(student, grade, studentsGrade, studentsGrade);
 
 
 }
-
-
 
 
 
@@ -566,19 +589,4 @@ else{System.out.println("ERROR: Array lengths are not all the same");}}
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}//CLASS//#endregion
+}//CLASS
