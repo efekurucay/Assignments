@@ -34,34 +34,57 @@ The expected file formats are as follows:
  */
 public class Assignment4_20220808005 {
 public static void main(String[] args) throws  FileNotFoundException{
-/*Description
-
+/*
 4. main(args) - You will have a main method in this program
     a. We will pass the base filename(s) as command line arguments
-        i. If one argument is passed, it will
-            1. Read the category information from a file called {base 
-            filename} + “_CourseDetails.txt”
-            2. Read the student information from a file called {base 
-            filename} + “_StudentScores.txt”
-            3. Write the student grades to a file called {base filename} + 
-            “_StudentGrades.txt”
-            4. Write any errors to a file called {base filename} + 
-            “_Errors.log”
-        ii. If four arguments are passed, it will
-            1. Read the category information from a file called {first 
-            argument} + “.txt”
-            2. Read the student information from a file called {second 
-            argument} + “.txt”
-            3. Write student grades to a file named {third argument} + 
-            “.txt”
-            4. Write any errors to a file called {fourth argument} + “.log”
-        iii. If any number of arguments other than one or four are passed, it 
-        will display an error message and exit
-    b. Returns none
  */
-test3("CSE101_StudentScores.txt");
+
+ if(args.length==1){
+  // i. If one argument is passed, it will
+  //           1. Read the category information from a file called {base 
+  //           filename} + “_CourseDetails.txt”
+String categoryInfo = args[0]+"_CourseDetails.txt";
+test2(categoryInfo);
 
 
+  //           2. Read the student information from a file called {base 
+  //           filename} + “_StudentScores.txt”
+
+String studentInfo = args[0]+"_StudentScores.txt";
+  //           3. Write the student grades to a file called {base filename} + 
+  //           “_StudentGrades.txt”
+String gradesInfo = args[0]+"_StudentGrades.txt";
+
+test3(gradesInfo,categoryInfo);
+
+  //           4. Write any errors to a file called {base filename} + 
+  //           “_Errors.log” 
+String errorInfo = args[0]+"_Errors.log";
+
+
+ }
+
+
+ else if (args.length==4){
+// ii. If four arguments are passed, it will
+// 1. Read the category information from a file called {first argument} + “.txt”
+String categoryInfo = args[0]+"_CourseDetails.txt";
+// 2. Read the student information from a file called {second argument} + “.txt”
+String studentInfo = args[1]+"_StudentScores.txt";
+//3. Write student grades to a file named {third argument} +  “.txt”
+String gradesInfo = args[2]+"_StudentGrades.txt";
+//4. Write any errors to a file called {fourth argument} + “.log” 
+String errorInfo = args[3]+"_Errors.log";
+
+
+}
+
+
+ else{/* iii. If any number of arguments other than one or four are passed, it will display an error message and exit */
+           System.out.println("ERROR: The amount of arguments must be 1 or 4.");}
+
+
+//    b. Returns none
 }   
 
 public static int countCategory(String filename) throws FileNotFoundException{ /*DONE*/
@@ -126,7 +149,7 @@ public static void getCategory(String[]category,int []quantity,int []weight,Stri
       scanner.close();
 }
 
-public static void writeGrades(String []student, double[]grade, String studentGrades,String errorLog) throws FileNotFoundException{
+public static void writeGrades(String []student, double[]grade, String studentGrades,String errorLog,String getCategory) throws FileNotFoundException{
 
 /*Description
 3. writeGrades(student, grade, studentGrades, errorLog)
@@ -143,12 +166,12 @@ public static void writeGrades(String []student, double[]grade, String studentGr
     d. Returns None
  */
   
- int lineAmount= countCategory("CSE101_CourseDetails.txt");
+ int lineAmount= countCategory(getCategory);
    String[] category= new String[lineAmount];
    int[] quantity = new int[lineAmount];
    int[] weight = new int[lineAmount];
 // Read information from the text file.
-   getCategory(category, quantity, weight, "CSE101_CourseDetails.txt");
+   getCategory(category, quantity, weight, getCategory);
 //Read and place students name from studentGrades text file to student array.
 //Read and place students grades from studentGrades text file to grade array.
       File file = new File(studentGrades);
@@ -239,9 +262,7 @@ double[]gpaPoints=new double[student.length];
         for(int i = 0; i < student.length; i++){
             write.println(student[i]+" "+overall[i]+" " + gradeString[i]+" "+ gpaPoints[i]+" "+ status[i]);
         }
-//John 78.51 BB 3.0 passed
         write.close();
-
 }
 
 public static int gradePerStudent() throws FileNotFoundException{
@@ -264,7 +285,6 @@ public static int gradePerStudent() throws FileNotFoundException{
    }
  return sum;
 }
-
 //Method tester for countCategory, getCategory, writeGrades
 public static void test1(String filename) throws FileNotFoundException{System.out.println(countCategory(filename));}
 
@@ -281,7 +301,7 @@ public static void test2(String filename) throws FileNotFoundException{
    
 }
 
-public static void test3(String filename) throws FileNotFoundException{
+public static void test3(String filename,String getCategory) throws FileNotFoundException{
 
 
 
@@ -290,7 +310,7 @@ double []grade = new double [36];
 String studentsGrade = filename;
 
 
-writeGrades(student, grade, studentsGrade, studentsGrade);
+writeGrades(student, grade, studentsGrade, studentsGrade,getCategory);
 
 
 
