@@ -140,8 +140,8 @@ public static void writeGrades(String []student, double[]grade, String studentGr
             to represent students with error conditions
     d. Returns None
  */
-System.out.println(countCategory("CSE101_CourseDetails.txt"));
- String[] category= new String[countCategory("CSE101_CourseDetails.txt")];
+
+   String[] category= new String[countCategory("CSE101_CourseDetails.txt")];
    int[] quantity = new int[countCategory("CSE101_CourseDetails.txt")];
    int[] weight = new int[countCategory("CSE101_CourseDetails.txt")];
 // Read information from the text file.
@@ -156,11 +156,6 @@ System.out.println(countCategory("CSE101_CourseDetails.txt"));
       int quant=0;
 
       double [][] grades = new double[student.length][9]; //BU 9 U ÇÖZMEK LAZIM
-
-    for (int i = 0; i < quantity.length; i++) {
-      
-    }
-
       double [][][] eachGrade= new double [student.length][category.length][9];
       // eachGrade [0][0][0] John's quizs first grade = 60
 
