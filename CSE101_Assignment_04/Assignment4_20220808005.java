@@ -38,53 +38,77 @@ public static void main(String[] args) throws  FileNotFoundException{
 4. main(args) - You will have a main method in this program
     a. We will pass the base filename(s) as command line arguments
  */
+  //Create Arrays
+  String courseDetails = args[0].concat("_CourseDetails.txt");// Homework 3 20 --> txt file 
+  String studentScores = args[0].concat("_StudentScores.txt");// Efe 50 10 56 85 95 90 100 80 76 --> txt file 
+  String studentGrades = args[0].concat("_StudentGrades.txt");// Efe 100.0 AA 4.0 passed --> txt file
+  String errorLog = args[0].concat("_Errors.log"); // ERROR: The amount of arguments must be 1 or 4 --> txt file
+  String []student = new String [countCategory(studentScores)]; // Array --> Can John Efe Cannot Burak from studentScores txt file
+  double []grade = new double [gradePerStudent(courseDetails)]; // Array --> Efe --> 50 10 56 85 95 90 100 80 76 
 
+
+  String[] category= new String[countCategory(courseDetails)]; // Array --> Quiz, Homework, Midterm, Final
+  int[] quantity = new int[countCategory(courseDetails)]; // Array --> 4,3,1,1
+  int[] weight = new int[countCategory(courseDetails)];//Array --> 10, 20, 30, 40
+  
+
+
+
+// getCategory(category, quantity, weight, courseDetails);
+// writeGrades(student, grade, studentGrades, errorLog);
+
+// i. If one argument is passed, it will
  if(args.length==1){
-  // i. If one argument is passed, it will
-  //           1. Read the category information from a file called {base 
-  //           filename} + “_CourseDetails.txt”
-String categoryInfo = args[0]+"_CourseDetails.txt";
-test2(categoryInfo);
+//1. Read the category information from a file called {base filename} + “_CourseDetails.txt”
+getCategory(category, quantity, weight, courseDetails);
+//2. Read the student information from a file called {base filename} + “_StudentScores.txt”
+//Read and place students name from studentGrades text file to student array.
+//Read and place students grades from studentGrades text file to grade array.
 
+      /*Calculating grades 
 
-  //           2. Read the student information from a file called {base 
-  //           filename} + “_StudentScores.txt”
+      // grades[0][0 to 8] = Can's grades. ( 50.0/ 70.0/ 8.0 /90.0 ) (20.0 /75.0 /70.0 )  (89.5) (2.0 )
+      //                                         Quiz                   Homework        Midterm   Final
+      //Total scores of each category
+      //sum[0][0] --> Quiz total for can
+      //sum[0][1] --> Homework total for can
+      //sum[0][2] --> Midterm total for can
+      //sum[0][3] --> Quiz total for can
+      //Average scores of each category---------------wTimesAv of each category 
+      //average[0][0] --> Quiz average for can--------average[0][0]*weight[0] -->
+      //average[0][1] --> Homework average for can----average[0][1]*weight[1] -->
+      //average[0][2] --> Midterm average for can-----average[0][2]*weight[2] -->
+      //average[0][3] --> Quiz average for can--------average[0][3]*weight[3] --> */
 
-String studentInfo = args[0]+"_StudentScores.txt";
-  //           3. Write the student grades to a file called {base filename} + 
-  //           “_StudentGrades.txt”
-String gradesInfo = args[0]+"_StudentGrades.txt";
+//3. Write the student grades to a file called {base filename} + “_StudentGrades.txt”
 
-test3(gradesInfo,categoryInfo);
-
-  //           4. Write any errors to a file called {base filename} + 
-  //           “_Errors.log” 
-String errorInfo = args[0]+"_Errors.log";
-
+writeGrades(student, grade, studentGrades, errorLog,studentScores);
+//4. Write any errors to a file called {base filename} + “_Errors.log” 
 
  }
-
-
+ 
+ // ii. If four arguments are passed, it will
  else if (args.length==4){
-// ii. If four arguments are passed, it will
+
 // 1. Read the category information from a file called {first argument} + “.txt”
-String categoryInfo = args[0]+"_CourseDetails.txt";
+courseDetails = args[0]+".txt";
 // 2. Read the student information from a file called {second argument} + “.txt”
-String studentInfo = args[1]+"_StudentScores.txt";
+studentScores = args[1]+".txt";
 //3. Write student grades to a file named {third argument} +  “.txt”
-String gradesInfo = args[2]+"_StudentGrades.txt";
+studentGrades = args[2]+".txt";
 //4. Write any errors to a file called {fourth argument} + “.log” 
-String errorInfo = args[3]+"_Errors.log";
+errorLog = args[3]+".log";
 
 
 }
 
-
- else{/* iii. If any number of arguments other than one or four are passed, it will display an error message and exit */
+/* iii. If any number of arguments other than one or four are passed, it will display an error message and exit */
+ else{
            System.out.println("ERROR: The amount of arguments must be 1 or 4.");}
 
 
 //    b. Returns none
+
 }   
 
 public static int countCategory(String filename) throws FileNotFoundException{ /*DONE*/
@@ -149,7 +173,7 @@ public static void getCategory(String[]category,int []quantity,int []weight,Stri
       scanner.close();
 }
 
-public static void writeGrades(String []student, double[]grade, String studentGrades,String errorLog,String getCategory) throws FileNotFoundException{
+public static void writeGrades(String []student, double[]grade, String studentGrades,String errorLog,String studentScores) throws FileNotFoundException{
 
 /*Description
 3. writeGrades(student, grade, studentGrades, errorLog)
@@ -165,56 +189,43 @@ public static void writeGrades(String []student, double[]grade, String studentGr
             to represent students with error conditions
     d. Returns None
  */
-  
- int lineAmount= countCategory(getCategory);
-   String[] category= new String[lineAmount];
-   int[] quantity = new int[lineAmount];
-   int[] weight = new int[lineAmount];
-// Read information from the text file.
-   getCategory(category, quantity, weight, getCategory);
-//Read and place students name from studentGrades text file to student array.
-//Read and place students grades from studentGrades text file to grade array.
-      File file = new File(studentGrades);
-      Scanner scanner = new Scanner(file);
-      int index = 0; 
-      double [][] grades = new double[student.length][gradePerStudent()];
-   
-      // eachGrade [0][0][0] John's quizs first grade = 60
-
+    
+double [][] grades = new double[student.length][grade.length];
+File file = new File(studentScores); Scanner scanner = new Scanner(file);
+int index = 0; 
       while (scanner.hasNext()) {
-          String line = scanner.nextLine();
-          // Separate the information in the line according to spaces
-          String[] parts = line.split(" ");
-
-        // Place into arrays related to reserved information
-        //Student informations
+            String line = scanner.nextLine();
+            // Separate the information in the line according to spaces
+            String[] parts = line.split(" ");
+          // Place into arrays related to reserved information
+          //Student informations
           student[index]  = parts[0];
-      
         // Grades information per student
         // grades[0][i] = John's grades.
-        // grades[1][i] = Can's grades. ( 50.0/ 70.0/ 8.0 /90.0 ) (20.0 /75.0 /70.0 )  (89.5)    (2.0 )
-        //                                        Quiz                  Homework      Midterm    Final
-        // grades[2][i] = Efe's grades.
+        // grades[1][i] = Can's grades. ( 50.0/ 70.0/ 8.0 /90.0 ) (20.0 /75.0 /70.0 )  (89.5)    (2.0 )                            
+        // grades[2][i] = Efe's grades.         Quiz                  Homework         Midterm    Final
         // grades[3][i] = Cannot's grades.
         // grades[4][i] = Burak's grades.
-          for (int i = 0; i < grades[0].length; i++) {
+     
+  for (int i = 0; i < grades[0].length; i++) { 
+    
+   grades[index][i]= Double.parseDouble(parts[i+1]);
+    } 
 
-              grades[index][i]= Double.parseDouble(parts[i+1]);
-          }
-          index++;
-      }//WHILE LOOP
-      
-        //Calculating grades 
+  index++;
+  System.out.println(grades[0][index]);
+  }//WHILE LOOP
 
-      // grades[0][0 to 8] = Can's grades. ( 50.0/ 70.0/ 8.0 /90.0 ) (20.0 /75.0 /70.0 )  (89.5) (2.0 )
-      //                                         Quiz                   Homework        Midterm   Final
-      //Total scores of each category
-      //sum[0][0] --> Quiz total for can
-      //sum[0][1] --> Homework total for can
-      //sum[0][2] --> Midterm total for can
-      //sum[0][3] --> Quiz total for can
-double[][]sum =new double[student.length][category.length]; int counter=0;
-      for (int i = 0; i < student.length; i++) {//Student i 
+
+
+
+
+ String[] category= new String[student.length]; // Array --> Quiz, Homework, Midterm, Final
+  int[] quantity = new int[student.length]; // Array --> 4,3,1,1
+  int[] weight = new int[student.length];//Array --> 10, 20, 30, 40
+
+ double[][]sum =new double[student.length][category.length]; int counter=0;
+            for (int i = 0; i < student.length; i++) {//Student i 
 
           for (int j = 0; j < category.length; j++) {//Categories j
                         if(j-1<0){counter=0;}
@@ -225,16 +236,7 @@ double[][]sum =new double[student.length][category.length]; int counter=0;
             }// for k        
           }// for j
         }//for i
-      //Average scores of each category
-      //average[0][0] --> Quiz average for can
-      //average[0][1] --> Homework average for can
-      //average[0][2] --> Midterm average for can
-      //average[0][3] --> Quiz average for can
-              //wTimesAv of each category 
-              //average[0][0]*weight[0] -->
-              //average[0][1]*weight[1] -->
-              //average[0][2]*weight[2] -->
-              //average[0][3]*weight[3] --> 
+           
 double [][] average = new double[student.length][category.length]; 
 //Weight * Average - average[0][0]*weight[0]
 double[][]wTimesAv=  new double[student.length][weight.length];
@@ -243,7 +245,6 @@ double[]overall =new double[student.length];
 String[]gradeString=new String[student.length];
 String[]status=new String[student.length];
 double[]gpaPoints=new double[student.length];
-
      for (int i = 0; i < student.length; i++) {//Student
           for (int j = 0; j < category.length; j++) {
              average[i][j]=sum[i][j]/ quantity[j];
@@ -253,70 +254,35 @@ double[]gpaPoints=new double[student.length];
             gradeString[i]=gradeLetter(overall[i]);
             status[i]=status(overall[i]);
             gpaPoints[i]=gpaPoints(overall[i]);}}
-
-      scanner.close();
+           
 //Writing to text file.
-        String filename="a.txt";
+        String filename="Scoress.txt";
         File file2 = new File(filename);
         PrintWriter write = new PrintWriter(file2);
         for(int i = 0; i < student.length; i++){
             write.println(student[i]+" "+overall[i]+" " + gradeString[i]+" "+ gpaPoints[i]+" "+ status[i]);
         }
         write.close();
+
+       
 }
 
-public static int gradePerStudent() throws FileNotFoundException{
+public static int gradePerStudent(String filename) throws FileNotFoundException{
 
 
     int sum=0;
-  String[] category= new String[countCategory("CSE101_CourseDetails.txt")];
-   int[] quantity = new int[countCategory("CSE101_CourseDetails.txt")];
-   int[] weight = new int[countCategory("CSE101_CourseDetails.txt")];
+  String[] category= new String[countCategory(filename)];
+   int[] quantity = new int[countCategory(filename)];
+   int[] weight = new int[countCategory(filename)];
+
 // Read information from the text file.
-   getCategory(category, quantity, weight, "CSE101_CourseDetails.txt");
+// "CSE101_CourseDetails.txt"
+   getCategory(category, quantity, weight,filename);
+   for (int i = 0; i < quantity.length; i++) {sum+=quantity[i];}
 
-
-   for (int i = 0; i < quantity.length; i++) {
-
-
-    sum+=quantity[i];
-   
-    
-   }
  return sum;
 }
-//Method tester for countCategory, getCategory, writeGrades
-public static void test1(String filename) throws FileNotFoundException{System.out.println(countCategory(filename));}
 
-public static void test2(String filename) throws FileNotFoundException{
-      // Test için kullanılacak dizileri oluşturun
-   String[] category= new String[10];
-   int[] quantity = new int[10];
-   int[] weight = new int[10];
-
-   // Dosyadan bilgileri okuyun
-   getCategory(category, quantity, weight, filename);
-
-   // Okunan bilgileri ekrana yazdırın (test amaçlı)
-   
-}
-
-public static void test3(String filename,String getCategory) throws FileNotFoundException{
-
-
-
-String []student = new String [5];
-double []grade = new double [36];
-String studentsGrade = filename;
-
-
-writeGrades(student, grade, studentsGrade, studentsGrade,getCategory);
-
-
-
- 
-
-}
 
 //ASSIGNMENT 3 METHODS
 
