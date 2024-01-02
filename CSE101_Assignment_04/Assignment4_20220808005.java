@@ -1,12 +1,14 @@
 import java.io.*;
 import java.util.Scanner;
 
+
 /**
  *-----------------------------------------------------
 * Akdeniz University CSE101T Assignments
 * Name: Yahya Efe Kurucay
 * Date: 26.12.2023
 * Description: Assignment4
+* Score: 51
 * Website: https://efekurucay.com
 *-----------------------------------------------------
 *Requirements: Write a program that will read files for both the category information and 
@@ -32,6 +34,46 @@ The expected file formats are as follows:
             a. Each error on a new line beginning with “ERROR: “ 
 
  */
+
+ /*Bu bir otomatik maildir!!
+ -------------START----------------
+20220808005 - Assignment4->51
+Test Result
+╷
+├─ JUnit Jupiter ✔
+├─ JUnit Vintage ✔
+│  └─ Assignment4_20220808005Test ✔
+│     ├─ shouldLogStudentGrade ✘ null
+│     │          >>> Probably failed because of the order of parameters
+│     ├─ shouldHaveAtleast9Methods ✔
+│     ├─ shouldLogErrorWhenWeightInvalid ✘ null
+│     │          >>> Probably failed because of the order of parameters
+│     ├─ shouldLogErrorWhenQuantityInvalid ✘ null
+│     │          >>> Probably failed because of the order of parameters
+│     ├─ shouldNotCalculateGradesWhenDetailsWrong ✘ null
+│     │          >>> Probably failed because of the order of parameters
+│     ├─ shouldDisplayErrorOnWongNumberOfArguments ✘ java.lang.AssertionError
+│     ├─ shouldHaveMinimum4Methods ✔
+│     ├─ writeGradesTest ✘ null
+│     │          >>> Probably failed because of the order of parameters
+│     ├─ getCategorySignatureTest ✔
+│     ├─ shouldFillArraysCorrectly ✔
+│     ├─ writeGradesSignatureTest ✘ Should have correct method signature for writeGrades (1 failure)
+│     │         java.lang.AssertionError: should have 4 parameter expected:<4> but was:<5>
+│     ├─ mainTestWith1Arg ✘ ABC_StudentGrades.txt and ABC_Errors.log should exist
+│     ├─ mainTestWith4Args ✘ null
+│     │          >>> Probably failed because of the order of parameters
+│     ├─ countCategoryTest ✔
+│     ├─ shouldLogErrorWhenWeightSumInvalid ✘ null
+│     │          >>> Probably failed because of the order of parameters
+│     ├─ shouldLogErrorWhenInvalidGrade ✘ null
+│     │          >>> Probably failed because of the order of parameters
+│     ├─ countCategorySignatureTest ✔
+│     └─ getCategoryTest ✔
+└─ JUnit Platform Suite ✔
+
+
+--------------END----------------- */
 public class Assignment4_20220808005 {
 public static void main(String[] args) throws  FileNotFoundException{
 /*
